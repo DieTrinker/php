@@ -13,6 +13,8 @@
  *      3.  Verbindung zum Server abbauen
  */
 
+$hr = "<hr>";
+
 //  Verbindung zum Server aufbauen
 /*
  * DB-Server:   a) IP
@@ -29,6 +31,8 @@ if(mysql_errno() != 0) {
 } else {
     echo "Verbindung mit DB-Server hergestellt...<br>";
 }
+
+echo $hr;
 
 /*
  * Abfragen formulieren und verarbeiten
@@ -48,6 +52,8 @@ if ($db) {
     echo "DB nicht ausgewählt!<br>";
 }
 
+echo $hr;
+
 $abfrage = "SELECT
                 code, name, continent
             FROM
@@ -60,6 +66,9 @@ $ergebnis = mysql_query($abfrage, $link);
 if($ergebnis != false) {
 
     echo "Ergebnis: ".$ergebnis."<br>";
+    
+    echo $hr;
+    
     //  ... und geben diese Datenmenge aus
     /*  um an die Datensätze zu gelangen, müssen wir diese
      * nacheinander aus der Datenmenge auslesen
@@ -110,3 +119,122 @@ if($ergebnis != false) {
 } else {
     echo "Kein Ergebnis vorhanden: ".mysql_error()."<br>";
 }
+
+echo $hr;
+
+/*  Daten einfügen mit INSERT INTO  */
+    // Hinzufügen eines vollständigen Datensatzes
+    $abfrageInstert1 = "
+            INSERT INTO
+                City
+            VALUES
+            (
+            0,
+            'Bitterfeld-Wolfen', \"DEU\",
+            'Sachsen-Anhalt', 41000
+            )";
+    
+    // Hinzufügen eines partiellen Datensatzes
+    $abfrageInsert2 = "
+            INSERT INTO
+                City
+            (
+                name,
+                countrycode,
+                population
+            )
+            VALUES
+            (
+                'Halle/S.',
+                'DEU',
+                230000
+            )";
+    
+    $ergebnis = mysql_query($abfrageInstert1, $link);
+    
+    //  ermittelt den auto_increment-Wert der letzten DB-Anfrage
+    $id = mysql_insert_id($link);
+    
+    //  INSERT-Abfragen liefern lediglich TRUE oder FALSE
+    if($ergebnis == true) {
+        echo "Neuer Datensatz hinzugefügt (Insert 1: ".$id.")! => ".$abfrageInstert1."<br>";
+    } else {
+        echo "Der Datensatz wurde nicht hinzugefügt!<br>";
+    }
+    
+    echo $hr;
+    
+    $ergebnis = mysql_query($abfrageInsert2, $link);
+    
+    //  ermittelt den auto_increment-Wert der letzten DB-Anfrage
+    $id = mysql_insert_id($link);
+    if($ergebnis == true) {
+        echo "Neuer Datensatz hinzugefügt (Insert 2: ".$id.")! => ".$abfrageInsert2."<br>";
+    } else {
+        echo "Der Datensatz wurde nicht hinzugefügt!<br>";
+    }
+    
+    echo $hr;
+    
+    /*  Daten ändern mit UPDATE */
+    $abfrageUpdate1 = "
+            UPDATE
+                City
+            SET
+                population = 40000
+            WHERE
+                id = 4220
+            ";
+    
+    $ergebnis = mysql_query($abfrageUpdate1, $link);
+    
+    if(mysql_affected_rows($link) > 0) {
+        echo "Datensatz wurde aktualisiert => Anzahl (".mysql_affected_rows($link).") => ".$abfrageUpdate1."<br>";
+    } else {
+        echo "Der Datensatz wurde nicht aktualisiert => Anzahl (".mysql_affected_rows($link).") ...( ".mysql_error()." ) => ".$abfrageUpdate1."<br>";
+    }
+    
+    echo $hr;
+    
+    $updateID = 4221;
+    $updatePop = 30000;
+    $abfrageUpdate2 = "
+            UPDATE
+                City
+            SET
+                population = ".$updatePop."
+            WHERE
+                id = ".$updateID."
+            ";
+    
+    
+    $ergebnis = mysql_query($abfrageUpdate2, $link);
+    
+    if(mysql_affected_rows($link) > 0) {
+        echo "Datensatz wurde aktualisiert => Anzahl (".mysql_affected_rows($link).") => ".$abfrageUpdate2."<br>";
+    } else {
+        echo "Der Datensatz wurde nicht aktualisiert => Anzahl (".mysql_affected_rows($link).") ...( ".mysql_error()." ) => ".$abfrageUpdate2."<br>";
+    }
+    
+    echo $hr;
+    
+    /*  Daten löschen mit DELETE    */
+    $abfrageDelete = "
+            DELETE FROM
+                City
+            WHERE
+                id = 4222
+            ";
+    
+    $ergebnis = mysql_query($abfrageDelete, $link);
+    
+    //  mysql_affected_rows() liegert ddie Anzahl der betroffenen Datensätze der
+    //  letzten Anfrage (bei > 0 konnte gelöscht werden)
+    
+    if(mysql_affected_rows($link) > 0) {
+        echo "Datensatz wurde gelöscht => Anzahl (".mysql_affected_rows($link).") => ".$abfrageDelete."<br>";
+    } else {
+        echo "Der Datensatz wurde nicht gelöscht => Anzahl (".mysql_affected_rows($link).") ...( ".mysql_error()." ) => ".$abfrageDelete."<br>";
+    }
+    
+    echo $hr;
