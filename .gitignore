@@ -1,0 +1,9 @@
+workspace
+RemoteSystemsTempFiles
+JavaScript Resources
+.metadata
+.git/
+php/.project
+.project
+.buildpath
+.settings

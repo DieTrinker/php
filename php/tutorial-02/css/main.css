@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.error,
+.error-highlight {
+	color: #f00;
+	font-size: .9em;
+	display: inline-block;
+}
+
+.error-highlight {
+	border: 1px solid rgba(255, 0, 0, .3);
+	width: 300px;
+}
