@@ -228,6 +228,8 @@ echo $hr;
     
     $ergebnis = mysql_query($abfrageDelete, $link);
     
+
+    
     //  mysql_affected_rows() liegert ddie Anzahl der betroffenen Datensätze der
     //  letzten Anfrage (bei > 0 konnte gelöscht werden)
     
