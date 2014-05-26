@@ -1,0 +1,7 @@
+-	HTTP ist zustandslos -> keine Speicherung von Daten (es wird sich nichts gemerkt)
+-	für Benutzeranmeldungen ungünstig, weil eine einmal erfolgte Anmeldung mit
+	jedem neuen Seitenaufruf wiederholt werden müsste
+-	Apache stellt grundlegenden AUTh-Mechanismus zur Verfügung (.htaccess, htpasswd)
+-	diese Lücke kann PHP schließen:
+		Benutzersitzungen -> sessions
+		

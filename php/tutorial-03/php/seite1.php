@@ -1,6 +1,5 @@
-<html>
-    <body>
-        <h1>Startseite</h1>
-    </body>
-</html>
-<?php
+<h1>Die Startseite</h1>
+
+<p>
+... bla bla bla ...
+</p>
