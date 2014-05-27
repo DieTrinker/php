@@ -1,4 +1,6 @@
 <?php
+	include 'scripte/mysql.inc.php';
+	
 	if (isset($_POST['upload'])) {
 		//var_dump($_FILES);
 		if ($_FILES['userfile']['error'] == 0){

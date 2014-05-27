@@ -1,3 +1,20 @@
+<?php
+// wir starten eine neue Sitzung bzw. setzen eine gestartete Sitzung fort
+$lebenszeit = 600;
+
+// setzt die Lebenszeit der Cookies auf eine Anzahl in Sekunden
+session_set_cookie_params($lebenszeit, 'php-upload/');
+
+session_start();
+//echo session_name().": ".session_id();
+
+//	wir tricksen: es wird ein neuer Cookie erzeugt:
+//		der genauso heißt, wie der Sitzungscookie
+//		den gleichen Inhalt hat(Sitzungs-ID)
+//		Aber: dessen Zeitstempel mit jedem Aufruf der Telpmateseite (index.php,
+//		so dass nur bei Inaktivität der Cookie tatsächlich altert
+setcookie(session_name(), session_id(), time() + $lebenszeit, 'php-upload/');
+?>
 <html>
 	<head>
 		<title>PHP Uploads verarbeiten</title>
@@ -7,8 +24,21 @@
 		<div id="header"></div>
 		<div id="navigation">
 			<ul id="horizmenue">
+			<?php
+			echo $_SESSION [ 'angemeldet' ];
+	        if ( $_SESSION [ 'angemeldet' ] == true ) {
+                echo ('<li><a href="index.php?seite=1">Home</a></li>');
+                echo ('<li><a href="index.php?seite=2">Galerie</a></li>');
+            } else {
+                echo ('<li><a href="index.php?seite=1">Home</a></li>');
+                echo ('<li><a href="index.php?seite=4">Anmelden</a></li>');
+    		}
+			?>
+				<!--
 				<li><a href="index.php?seite=1">Home</a></li>
+				<li><a href="index.php?seite=4">Anmelden</a></li>
 				<li><a href="index.php?seite=2">Galerie</a></li>
+				 -->
 			</ul>
 		</div>
 		
@@ -30,6 +60,9 @@
                         break;
                     case '3':
                         include 'scripte/seite3.php';
+                        break;
+                    case '4':
+                        include 'scripte/seite4.php'; //	Login-Formular
                         break;
                 }
 			?>
