@@ -25,7 +25,6 @@ setcookie(session_name(), session_id(), time() + $lebenszeit, 'php-upload/');
 		<div id="navigation">
 			<ul id="horizmenue">
 			<?php
-			echo $_SESSION [ 'angemeldet' ];
 	        if ( $_SESSION [ 'angemeldet' ] == true ) {
                 echo ('<li><a href="index.php?seite=1">Home</a></li>');
                 echo ('<li><a href="index.php?seite=2">Galerie</a></li>');

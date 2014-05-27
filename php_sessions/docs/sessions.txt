@@ -1,0 +1,27 @@
+-	in PHP existieren einige Funktionen für das Verwalten von Sessions:
+		(de3.php.net/manual/de/book.session.php)
+		
+-	prinzipiell werden Sessions wie folgt verwendet:
+		1)	Session starten
+		2)	mit der Session arbeiten (Werte speichern und auslesen)
+		3)	Session beenden
+		
+-	der wesentliche Punkt 2) wird über das Arbeiten mit dem
+	supergloabelen Array $_SESSION[ ] abgewickelt
+	
+	speichern: $_SESSION[ key ] = value
+	
+	auslesen: if ( $_SESSION[ key ] == value )
+	
+-	falls innherhalb eines Web-Projektes mit Sessions gearbeitet werden soll, muss
+	*jede* Seite, die auf die Sitzung zugreifen möchte, den Aufruf
+	
+		session_start()
+	
+	ausführen
+	
+	Hinweis:	session_start() verwendet den Sitzungscookie und HTTP erlaubt
+				das Verwenden von Cookies nur zu Beginn der Seitenübertragung
+				
+				--> session_start() !! muss !! als erste Anweisung
+					im HTML-Markup/PHP-Bereich verwendet werden

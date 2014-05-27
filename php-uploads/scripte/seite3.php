@@ -19,7 +19,6 @@
 			}
 		}
 	}
-	var_dump($_FILES);
 ?>
 <h1>Bild hochladen</h1>
 

@@ -1,13 +1,13 @@
 <?php
 
-	$lebenszeit = 120;
-	session_set_cookie_params($lebenszeit);
-	session_start();
-	setcookie(session_name(), session_id(), time() + $lebenszeit);
-	
-	echo "alles gut - index.php<br>";
-	
-	echo "eigentlich abgemeldet: ? ==> ".$_SESSION['angemeldet']."<br>";
+$lebenszeit = 120;
+session_set_cookie_params( $lebenszeit, 'ks.kluhil.php/php/tutorial-03' );
+session_start();
+setcookie( session_name(), session_id(), time() + $lebenszeit, 'ks.kluhil.php/php/tutorial-03'  );
+
+echo "alles gut - index.php<br>";
+
+echo "eigentlich abgemeldet: ? ==> " . $_SESSION [ 'angemeldet' ] . "<br>";
 ?>
 <html>
 <head>
@@ -22,19 +22,18 @@
 
 </div>
 
-
 <div id="nav">
 <ul>
 <?php
-	if ($_SESSION['angemeldet'] == false){
+if ( $_SESSION [ 'angemeldet' ] == false ) {
 ?>
 <li> <a href="index.php?seite=1">Home</a> </li>
 <li> <a href="index.php?seite=2">Gästebuch</a> </li>
 <li> <a href="index.php?seite=4">Zäsur</a> </li>
 <?php
 }
-		if ($_SESSION['angemeldet'] == true){
-echo "immer noch angemeldet<br>";
+if ( $_SESSION [ 'angemeldet' ] == true ) {
+    echo "immer noch angemeldet<br>";
 ?>
 <li> <a href="index.php?seite=1">Home</a> </li>
 <li> <a href="index.php?seite=2">Gästebuch</a> </li>
@@ -44,34 +43,33 @@ echo "immer noch angemeldet<br>";
 </ul>
 </div>
 
-
 <div id="main">
-
 <?php
 
 $seite = "";
-if( isset( $_GET['seite'] ) )
-$seite = $_GET['seite'];
+if ( isset( $_GET [ 'seite' ] ) )
+    $seite = $_GET [ 'seite' ];
 
-switch( $seite ) {
+switch ( $seite )
+    {
 
-default:
-case '1':	// Startseite/Home
-include 'php/seite1.php';
-break;
+        default:
+        case '1': // Startseite/Home
+            include 'php/seite1.php';
+            break;
 
-case '2':	// Gästebuch anzeigen
-include 'php/seite2.php';
-break;
+        case '2': // Gästebuch anzeigen
+            include 'php/seite2.php';
+            break;
 
-case '3':	// Formular für das Gästebuch
-include 'php/seite3.php';
-break;
+        case '3': // Formular für das Gästebuch
+            include 'php/seite3.php';
+            break;
 
-case '4':	// Formular für die Zensur
-include 'php/seite4.php';
-break;
-}
+        case '4': // Formular für die Zensur
+            include 'php/seite4.php';
+            break;
+    }
 
 ?>
 </div>
