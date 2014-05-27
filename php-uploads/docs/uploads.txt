@@ -1,0 +1,42 @@
+		1)	Formulare benötigen zum einen das <input type="file" ...> Steuerelement
+		
+		2)	Formular wird als HTTP-POST mit Anhang verschickt
+			(das Formular muss entsprehend deklariert werden
+		
+		<form action="..." method="POST" enctype="multipart/form-data"
+		
+		3)	in PHP werden die hochgeladenen Datein über das superglobale Array $_FILES
+			bereitgestellt
+			3.1	es handelt sich um ein zweidmensionales Feld
+					$_FILES[ DIM-A ][ DIM-B ]
+					
+					[ DIM-A ]	=> steht für hochgeladene Datei
+					[ DIM-B ]	=> steht für die einzelnen Meta-Daten zu dieser Datei
+					
+			3.2	Meta-Daten zu den Dateien
+			
+				$_FILES[ ... ][ 'name' ]		=>	ursprünglicher Name der Datei
+				$_FILES[ ... ][ 'type' ]		=>	Dateityp, (s.a. http://www.iana.org/assignments/media-types/media-types.xhtml)
+				$_FILES[ ... ][ 'tmp_name' ]	=>	Name der temporären Datei auf dem Server
+				$_FILES[ ... ][ 'error' ]		=>	Fehlercode (0 = kein Fehler)
+				$_FILES[ ... ][ 'size' ]		=>	Dateigröße in Bytes
+				
+		4)	Workflow
+		
+			4.1	Prüfung, ob Übwertragung fehlerfrei verlaufen ist
+			4.2	Bilden eines eindeutigen Dateinamens für die Datei im Upload-Verzeichnis:
+				Benutzer A lädt 'bild-a.jpg' hoch =>	Kollosion mit B möglich
+				Benutzer B lädt 'bild-a.jpg' hoch =>	Kollosion mit A möglich
+				
+			4.3	Bild aus dem temp-Verzeichnis in das Upload-Verzeichnis verschieben
+			
+		5)	PHP-Konfiguration (/etc/php5/apache2/php.ini)
+		
+			5.1	file_uploads
+				-	steuert, ob überhaupt Uploads durchgeführt werden können ('on' oder 'true' oder 1)
+				
+			5.2	upload_max_size (integer)
+				-	maximal erlaubte Uploadgröße (default-Wert ist zu klein)
+			
+			5.3	max_file_uploads (integer)
+				-	Anzahl maximal erlaubter gleichzeitiger HTTP-POST Uplodas

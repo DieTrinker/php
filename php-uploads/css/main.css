@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+.gb-eintrag {
+	margin:1em 0;
+	width: 50%;
+	border: 1px solid #ddd;
+}
+
+.gb-meta {
+	font-size: 0.8em;
+}
+
+.gb-content {
+	margin: 0.5em 0;
+}
+
+#horizmenue {
+  width: 360px; 
+}
+#horizmenue li {
+  display: inline;
+  padding: 0px 10px; 
+}
+#horizmenue a {
+  padding: 2px 8px 5px; 
+}
