@@ -1,23 +1,48 @@
 CREATE database db_galerie;
 
-CREATE TABLE account 
-(
-	id			int unsigned not null auto_increment primary key, 
-	name		char(80), 
-	passwort	sha1(), 
-	email		char(120), 
-	ip			char(39)
-)	engine=MyISAM default charakter set=utf8;
+USE db_galerie;
 
-CREATE TABLE galerie 
-(
-	name_upl	char(120) not null, 
-	account_id	int not null, 
-	name_ori	char(80), 
-	groesse		int, 
-	ort			char(120), 
+CREATE TABLE account 
+( 
+	account		char(20)  not null, 
+	passwort	char(40), 
+	email		char(120), 
 	ip			char(39), 
-	date_upl	now(), 
-	PRIMARY KEY (name_upl), 
-	FOREIGN KEY (account_id) REFERENCES ACCOUNT (id) 
-) engine=MyISAM default charakter set=utf8;
+	PRIMARY KEY(account) 
+)	engine=InnoDB default character set=utf8;
+
+CREATE TABLE bild  
+(
+	bildID		char(40) not null,  
+	accountID	char(20) not null, 
+	dateiName	char(255), 
+	pfad		char(120), 
+	datum		datetime, 
+	ip			char(39),  
+	PRIMARY KEY (bildID), 
+	FOREIGN KEY(accountID) REFERENCES account(account) 
+) engine=InnoDB default character set=utf8;
+
+CREATE TABLE bewertung 
+(
+	accountID	char(20) not null, 
+	bildID		char(40) not null,
+	datum		datetime, 
+	wertung		tinyint unsigned, 
+	ip			char(39), 
+	PRIMARY KEY(accountID, bildID), 
+	FOREIGN KEY(accountID) REFERENCES account(account), 
+	FOREIGN KEY(bildID) REFERENCES bild(bildID)  
+)  engine=InnoDB default character set=utf8;
+
+CREATE TABLE kommentar 
+(
+	accountID	char(20) not null, 
+	bildID		char(40) not null,
+	datum		datetime, 
+	kommentar	text, 
+	ip			char(39), 
+	PRIMARY KEY(accountID, bildID), 
+	FOREIGN KEY(accountID) REFERENCES account(account), 
+	FOREIGN KEY(bildID) REFERENCES bild(bildID) 
+) engine=InnoDB default character set=utf8;
