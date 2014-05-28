@@ -40,7 +40,7 @@
 							'".$ip."'
 						)
 						";
-				
+				mysql_num_rows(mysql_query($abfrage));
 				mysql_query($abfrage);
 			}else {
 				echo "Datei konnte nicht hochgeladen werden!<br>";

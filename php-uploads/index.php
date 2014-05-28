@@ -1,4 +1,6 @@
 <?php
+//error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ERROR);
 // wir starten eine neue Sitzung bzw. setzen eine gestartete Sitzung fort
 $lebenszeit = 600;
 
@@ -18,7 +20,7 @@ setcookie(session_name(), session_id(), time() + $lebenszeit, 'php-upload/');
 <html>
 	<head>
 		<title>PHP Uploads verarbeiten</title>
-		<link rel="stylesheet" href="css(main.css" type="txt/css" />
+		<link rel="stylesheet" href="css/main.css" type="txt/css" />
 	</head>
 	<body>
 		<div id="header"></div>
@@ -28,6 +30,7 @@ setcookie(session_name(), session_id(), time() + $lebenszeit, 'php-upload/');
 	        if ( $_SESSION [ 'angemeldet' ] == true ) {
                 echo ('<li><a href="index.php?seite=1">Home</a></li>');
                 echo ('<li><a href="index.php?seite=2">Galerie</a></li>');
+                echo ('<li><a href="scripte/_logout.php">Abmelden</a></li>');
             } else {
                 echo ('<li><a href="index.php?seite=1">Home</a></li>');
                 echo ('<li><a href="index.php?seite=4">Anmelden</a></li>');
