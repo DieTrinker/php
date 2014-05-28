@@ -23,18 +23,33 @@
 	$i = 1;
 	while ($datensatz = mysql_fetch_array($ergebnis)) {
 		//	Darstellen der einzelnen Bilder
+		//echo $datensatz['pfad']."/".$datensatz['dateiName'];
+		
+		//	Ermitteln der Bewertung
+		$abfrage = "
+				SELECT
+					count(*) AS anzahl,
+					avg(wertung) AS sterne
+				FROM
+					bewertung
+				WHERE
+					bildID='".$datensatz['bildID']."'
+				";
+		
+		$ergebnis_wertung = mysql_query($abfrage, $link);
+		$datensatz_wertung = mysql_fetch_array($ergebnis_wertung);
 		
 		echo "
 			<div class='thumbnail'>
 				<div class='pic-wrapper'>
-					<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." height='100'/>
+					<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." />
 				</div>
 				<br />
-			Caption
+				".$datensatz_wertung['sterne']." Sterne ( ".$datensatz_wertung['anzahl']." )
 			</div>";
-		echo "modulo 3: ".$i%3;
+		//echo "modulo 3: ".$i%3;
 		if ($i%3 == 0){
-			echo "jetze aber: <br class='clearboth'>";
+			echo "<br class='clearboth'>";
 		}
 		$i++;
 	}

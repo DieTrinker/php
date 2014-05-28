@@ -20,7 +20,7 @@ setcookie(session_name(), session_id(), time() + $lebenszeit, 'php-upload/');
 <html>
 	<head>
 		<title>PHP Uploads verarbeiten</title>
-		<link rel="stylesheet" href="css/main.css" type="txt/css" />
+		<link rel="stylesheet" href="css/main.css" type="text/css" />
 	</head>
 	<body>
 		<div id="header"></div>
