@@ -1,7 +1,8 @@
 <?php
 //	die Sitzung starten bzw. wieder aufnehmen
 session_start();
-
+//var_dump($_POST);
+//echo $_POST['login']."<br>";
 //	Prüfung der anmeldedaten gegen die Datenbank db_credentials
 if ( isset( $_POST [ 'login' ] ) ) {
 
@@ -17,10 +18,10 @@ if ( isset( $_POST [ 'login' ] ) ) {
 			AND
 				passwort = '" . sha1( trim( $_POST [ 'passwort' ] ) ) . "'";
 
-     //echo "abfrage: ".$abfrage;
+     //echo "abfrage: ".$abfrage."<br>";
 
     $ergebnis = mysql_query( $abfrage );
-    echo "num_rows: ".mysql_num_rows( $ergebnis );
+    //echo "num_rows: ".mysql_num_rows( $ergebnis );
 
     // falls die Anmeldedaten verifiziert werden konnten, speichern wir den "Erfolg/Misserfolg"
     // in der Session

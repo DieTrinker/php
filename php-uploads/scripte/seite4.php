@@ -2,7 +2,7 @@
 
 <?php
 
-//echo $_SESSION['angemeldet']."<br>";
+echo $_SESSION['angemeldet']."<br>";
 ?>
 
 <form
