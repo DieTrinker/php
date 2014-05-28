@@ -26,7 +26,10 @@
 		
 		echo "
 			<div class='thumbnail'>
-			<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." height='120' width='100'/>
+				<div class='pic-wrapper'>
+					<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." height='100'/>
+				</div>
+				<br />
 			Caption
 			</div>";
 		echo "modulo 3: ".$i%3;
