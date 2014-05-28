@@ -26,10 +26,13 @@
 		//echo $datensatz['pfad']."/".$datensatz['dateiName'];
 		
 		//	Ermitteln der Bewertung
+		//	wenn avg(...) null ist, dann gib etwas anderes (z.B. 0 oder String) aus
+		//		=> ifnull()
+		//	floor() => schneidet Nachkommastellen ab
 		$abfrage = "
 				SELECT
 					count(*) AS anzahl,
-					avg(wertung) AS sterne
+					floor( ifnull( avg(wertung), 0 ) ) AS sterne
 				FROM
 					bewertung
 				WHERE
@@ -45,7 +48,9 @@
 					<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." />
 				</div>
 				<br />
-				".$datensatz_wertung['sterne']." Sterne ( ".$datensatz_wertung['anzahl']." )
+				<a href='".$datensatz['pfad']."/".$datensatz['dateiName']."'>Download</a>
+				<br />
+				".$datensatz_wertung['sterne']." Sterne <br> ".$datensatz_wertung['anzahl']." Stimmen
 			</div>";
 		//echo "modulo 3: ".$i%3;
 		if ($i%3 == 0){

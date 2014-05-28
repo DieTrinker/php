@@ -56,9 +56,7 @@
 	<label for="userfile">Bild auswählen:
 		<input type="file" name="userfile" id="userfile" accept="image/*" />
 	</label>
-	
 	<br>
 	<br>
-	
 	<input type="submit" name="upload" id="upload" value="hochladen" />
 </form>
