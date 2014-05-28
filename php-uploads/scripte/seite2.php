@@ -28,7 +28,7 @@
 			<div class='thumbnail'>
 			<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." height='120' width='100'/>
 			Caption
-			<div>";
+			</div>";
 		echo "modulo 3: ".$i%3;
 		if ($i%3 == 0){
 			echo "jetze aber: <br class='clearboth'>";
