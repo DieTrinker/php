@@ -66,6 +66,9 @@ setcookie(session_name(), session_id(), time() + $lebenszeit, 'php-upload/');
                     case '4':
                         include 'scripte/seite4.php'; //	Login-Formular
                         break;
+                    case '5':
+                        include 'scripte/seite5.php'; //	Login-Formular
+                        break;
                 }
 			?>
 		</div>

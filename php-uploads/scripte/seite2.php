@@ -45,12 +45,23 @@
 		echo "
 			<div class='thumbnail'>
 				<div class='pic-wrapper'>
-					<img src=".$datensatz['pfad']."/".$datensatz['dateiName']." />
+					<a href='?seite=5&bildID=".$datensatz['bildID']."'><img src=".$datensatz['pfad']."/".$datensatz['dateiName']." />
 				</div>
+				<br />";
+		
+		$anzahlSterne = (int) $datensatz_wertung['sterne'];
+		
+		
+		echo "
 				<br />
-				<a href='".$datensatz['pfad']."/".$datensatz['dateiName']."'>Download</a>
-				<br />
-				".$datensatz_wertung['sterne']." Sterne <br> ".$datensatz_wertung['anzahl']." Stimmen
+				";
+				
+				while ($anzahlSterne-- > 0) {
+				
+					echo "<img src='bilder/stern.png' height='10' />";
+				}
+		echo "
+				<br> ".$datensatz_wertung['anzahl']." Stimmen
 			</div>";
 		//echo "modulo 3: ".$i%3;
 		if ($i%3 == 0){
