@@ -1,0 +1,89 @@
+Grundlagen der OOP I
+====================
+
+-	Klassen und Objekte
+		-	Gruppe von Dingen, Lebenwesenoder Befriffen, die gemeinsame Merkmale haben
+		-	Merkmale bschreiben Zustand von Objekte und/oder ein mögliches Verhalten
+		-	K. ist eine Abstraktion und dient als Bauplan für konkrete Objekte
+		-	Zustand wird in (Instanz-, Objekt-)Variablen gespeichert
+			-> Eigenschaften oder Attribute
+		-	die Belegung der Instanzvariablen einess Objektes mit Werten definiert
+			folglich dessen Zustand
+		-	jedes Objekt einer Klasse besitzt seine eigenen Instanzvariablen
+		-	Verhalten aller Objekte einer Klasse wird duch Funktionen beschrieben:
+			-> Methoden:
+				-	definiert eine Operation, die auf dem Objekt ausgeführt werden kann
+				-	besteht aus Methodendeklaration und Methodenrumpf
+				-	Methodendeklaration definiert, wie die M. heißt und welche Parameter ihr
+					übergeben werden können
+				-	Name und Parameter bilden die signatur der M.
+				-	M.rumpf wird in geschweifte Klammern eingefasst und enthält beliebigen PHP-Code
+		-	das gelebte Prinzip, Zustand und Verhalten einer Klasse zusammenzufassen,
+			wird als Kapseleung bezeichnet
+		-	Kapselung bildet die Grundlage der OOP
+		-	idealerweise ist der innere Aufbau einer Klasse nach außen hin verborgen (Geheimnisprinzip)
+		-	Klassendiagramme veranschaulichen die Struktur (Zustand, Verhalten) einer Klasse
+		
+		=================			=================
+		|	PERSON		|				AUTO
+		|	-----------	|				----------
+		|	Körpergröße	|				Kraftstoff
+		|	Geschlecht	|				Marke
+		|	Haarfarbe	|				Farbe
+		|	Gewicht		|				PS
+		|	-----------	|				----------
+		|	laufen()	|				tanken()
+		|	essen()		|				fahren()
+		|	wachsen()	|				parken()
+		=================			=================
+		
+		-	das Prinzip der Kapselung wird durch die Angabe der Sichtbarkeit von Eigenschaften 
+			und Methoden einer Klasse haben
+		
+		-	Eigenschaften einer Klasse können sein:
+			-	öffentlich
+					-->	Zugriff aus allen Programmteilen möglich
+					-->	Schlüsselwort: public
+			-	geschützt
+					-->	Zugriff  nur möglich innerhalb der Klasse und aus vererbten Klassen
+					-->	Schlüsselwort:	protected
+			-	privat
+					-->	Zugriff  nur möglich innerhalb der Klasse
+					-->	Schlüsselwort:	private
+
+		-	Klasse
+			-	Schlüsselwort class
+			-	K.Deklaration
+					->	Name der K. und etwaige K.Beziehungen
+			-	K.Rumpf
+			
+		-	Wie regelt die Klasse den Zugriff auf die Eigenschaften und Methoden der zukünftigen Objekte,
+			wo doch noch keine Objekte existieren?
+			
+		-	Wie kann der Programmerer Eigenschaften und Methoden für Eigenschaften und Methoden
+			für zukünftige  Projekte programmieren?
+			
+		--> Stellvertreter - Bezeichner: this
+				-	referenziert immer das Objekt, das auf eine Eigenschaft oder Methode
+					zugreifen möchte
+-	Konstruktoren und Destruktoren
+-	statische Klassenelemente
+
+		-	PHP ermöglicht den Zugriff auf Eigenschaften und Methoden, ohne dass dafür
+			eine Instanz der Klasse gebildet werden muss
+		-	diese Eigenschaften und Methoden werden als statische Klassenelemente bezeichnet
+		-	Schlüsselwort: static
+		
+		-	der Zugriff auf staische K.Elemente erfolgt innerhalb der Klasse über das
+			Schlüsselwort: self
+			
+		-	das Schlüsselwort self bezieht sich immer uaf die Klasse, in der das Schlüsselwort
+			verwendet wurde
+			
+		-	an die Stelle des Pfeiloperators tritt der Scope-Operator <::>
+		
+		-	Zugriff von außerhalb der Klasse:
+				-->	mit Klassenname und Scopeoperator
+				
+				(die gleiche Syntax gilt für den Zugriff auf konstante Eigenschaften
+				und den Konstruktor der Elternklasse)
