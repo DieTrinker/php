@@ -1,0 +1,67 @@
+Klassenbeziehungen
+******************
+
+-	vermeide, Quellcode doppelt zu schreiben
+-	verwende wieder, was du bereits getestet hast
+-	es ergeben sich beim Schreiben neuer Software zwangsläufig Klassenbeziehungen,
+	die die bekannten Beziehungen ergänzen (Vererbung, Schnittstellen)
+	
+-	Assoziation
+				-	beliebige Beziehung zw. (den Objekten von) Klassen
+				-	KUNDE erteilt AUFTRAG
+				-	LIEFERANT liefert ARTIKEL
+				
+				-	unidirektionale A.:
+										-	Bekanntschaftsbeziehung in eine Richtung
+											KUNDE --erteilt--> AUFTRAG
+										-	der Kunde kennt seinen Auftrag, der Auftrag
+											weiß aber nicht, wer ihn erteilt hat
+											
+						-->	die Referenzen werden nur in einer Klasse verwaltet
+						
+						
+				-	bidirektionale A.:
+										-	Bekannschaftsbeziehung in beide Richtungen
+											KUNDE <---erteilt---> AUFTRAG
+											
+						-->	die Referenzen werden in beiden Klassen verwaltet
+											
+				-	Multiplizität:
+										-	bezeichnet ein Intervall von positiven,
+											ganzen Zahlen und gibt an, wieviele Objekte (einer Klasse)
+											an einer Assoziation beteiligt sein können
+										-	M. können fest oder variabel sein
+										-	bei der festen M. steht eine ganze Zahl für die
+											Anzahl der Objekte
+											1 KUNDE --erteilt--> 1 AUFTRAG
+											1 KUNDE --erteilt--> 4 AUFTRÄGE
+										-	bei der variablen M. ein Intervall für die
+											Anzahl der Objekte
+											1 LIEFERANT ---liefert---> 1...4 ARTIKEL
+											1 LIEFERANT ---liefert---> 0...8 ARTIKEL
+											1 LIEFERANT ---liefert---> 0...* ARTIKEL
+											
+						-->	0...1-M.	es genügt eine Referenzvariable
+						--> *-M.		es kann mehr als ein Objekt an der A. beteiligt sein
+										es werden mehrere Referenzvariablen benötigt (Array)										
+											
+				-	in PHP:
+										-	A. wird in PHP als Referenz realisiert
+										-	die Vwerwaltung der Refernezen erfolgt durch 3 Operationen:
+											1) setLink		- eine Verbindung wird eingerichtet
+											2) getLink		-	zum Abfragen einer Verbindung
+											3) removeLink	-	eine Verbindung wird gelöscht
+										-	die Programmierung hängt ab von der A.Richtung und 
+											der Multiplizität
+
+-	Aggregation
+				-	'hat-ein' oder 'ist-Teil-von-' Beziehung
+				-	... versteht man die ZusSetzung eines Objektes(A.Objekt) aus (Teil)Objekten,
+					wobei die (Teil)-Objekte nicht existenzabhängig vom Aggregat sind
+				
+-	Komposition
+				-	strengere Form der Aggregation, bei der das Teil vom Ganzen abhängig ist
+				-	Zusammensetzung eines Objektes(KompositionsO.) aus (Teil-)Objekten, wobei die
+					(Teil-)Objekte vom Kompositionsobjekt
+					KUNDE ---hat---> Bankverbindung
+					1	  ---------> 1 (*)
