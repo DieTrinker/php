@@ -11,11 +11,11 @@ function __autoload($klasse){
     include $file;
 }
 /* ************************************************************************** */
-// wir tsten unsere HTML-Fabrik
+// wir testen unsere HTML-Fabrik
 
 $data = array(
     
-        array("Überschrift1","Überschrift2","Überschrift3","Überschrift4","Überschrift5"),
+        array("Überschr1","Ue2","Ue3","Ue4","Ue5"),
         array(1,2,3,4,5),
         array(10,20,30,40,50),
         array(100,200,300,400,500)
@@ -23,6 +23,17 @@ $data = array(
 
 // wir erzeugen die Fabrik
 $fabrik = new HTMLFactory();
+
+// wir erzeugen den Client und injizieren die Fabrik
+$client = new Client($fabrik);
+
+// wir lassen den Client die Daten ausgeben
+$client->showData($data);
+
+/* ************************************************************************** */
+// wir testen unsere Text(ASCII)-Fabrik
+// wir erzeugen die Fabrik
+$fabrik = new TextFactory();
 
 // wir erzeugen den Client und injizieren die Fabrik
 $client = new Client($fabrik);
