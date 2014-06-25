@@ -39,7 +39,7 @@ class Automobile{
         }
     }
     
-    // Zündung einschalten
+    // Zündung ausschalten
     public function stopIgnition(){
         if ($this->ignite){
             $this->ignite = false;
