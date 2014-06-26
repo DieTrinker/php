@@ -14,7 +14,7 @@ class Intervallinspektion implements Beobachter{
         $this->intervall = $wartungsintervall;
     }
     
-    public function update(Beobachter $auto){
+    public function update(Beobachtbar $auto){
         
         if($auto->getKilometerstand() >= $this->naechsteInspektion){
             

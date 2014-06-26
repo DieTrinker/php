@@ -75,11 +75,11 @@ class Auto implements Vehicle, Beobachtbar {
     // Methoden des Interface Beobachtbar
     
     // attach fügt einen neuen Beobachter hinzu
-    public function attach(Beobachtbar $observer){
+    public function attach(Beobachter $beobachter){
         $this->beobachter[] = $beobachter;
     }
     
-    public function detach(Beobachtbar $observer){
+    public function detach(Beobachter $beobachter){
         
         // Differenz bilden aus zwei Arrays (A1 - A2)
         // wir ziehen von unserem Feld der Beobachter ein Feld ab,
