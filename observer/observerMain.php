@@ -20,7 +20,7 @@ $erstInspektor = new Erstinspektion();
 $intervallInspektor = new Intervallinspektion(3500, 2500);
 
 $auto->attach($erstInspektor);
-$auto->attach($auto);
+$auto->attach($intervallInspektor);
 
 // Auto ein paar km fahren
 // Dessau -> Paris
