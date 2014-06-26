@@ -1,0 +1,7 @@
+Verhaltensmuster: Observer (Beobachter)
+***************************************
+
+-	eine Gruppe von Beobachtern beobachtet ein Subjekt und wird von diesem Subjekt
+	automatisch über Änderungen des Zustandes des Subjektes informiert
+	
+	http://www.philipphauer.de/study/se/design-pattern/observer.php
