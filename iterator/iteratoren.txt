@@ -1,0 +1,118 @@
+aus:
+http://www.php.de/php-einsteiger/86826-anwendung-iterator-pattern-2.html
+------------------------------------------------------------------------
+
+Ich glaube, hier besteht ein grundsätzliches Missverständnis. Man muss zwischen drei verschiedenen Konzepten unterscheiden, die sich mit dem Namen "Iterator" schmücken:
+
+1.) Der Datentyp Iterator.
+2.) Das Iterator-Pattern.
+3.) Das Iterator-Interface in PHP.
+
+"Iterieren" bedeutet wörtlich, eine Aktion wiederholt auszuführen. Mehr nicht.
+
+Der Datentyp Iterator
+=====================
+
+äußere Iteratoren
+-----------------
+
+In funktionalen Sprachen ist ein Iterator eine Funktion, die wiederholt aufgerufen
+werden kann und dabei stets einen neuen (aber nicht zwingend ungleichen) Wert zurückgibt.
+Außerdem signalisiert die Funktion, wenn nötig, dass sie vom Iterieren genug hat.
+Das kann über einen zweiten Rückgabewert, über das Werfen einer Exception, in selteneren Fällen
+ auch über einen speziellen Rückgabewert erfolgen.
+
+In objektorientierten Sprachen sind Iteratoren Objekte, die eine spezielle
+Memberfunktion besitzen, die wiederholt aufgerufen werden kann. Das Ende der Iteration
+wird je nach Geschmack durch Aufruf einer weiteren Member-Funktion oder wie bei den funktionalen Iteratoren signalisiert.
+
+Benutzt werden Iteratoren, um Folgen von Werten zu liefern (aber auch deren Bearbeitung
+ist möglich, siehe [2]). Die können bei jeder Abfrage erzeugt werden oder aus
+einer Sammlung von Werten geholt werden.
+
+Die Abruf-Funktion heißt traditionell gerne next(). Das sagt aber nichts über
+die Richtung aus, in der ein Iterator eine darunterliegende Sequenz von Werten
+abarbeitet, sondern bezieht sich darauf, dass auf die aktuelle Iteration eine weitere (oder nächste) folgt.
+
+Innere Iteratoren
+-----------------
+
+Die Funktionen von Iterator-Interfaces werden selten direkt angesteuert
+(obwohl das prinzipiell auch ginge), sondern über entsprechende Sprachkonstrukte
+(wie foreach in PHP) oder über spezielle Funktionen, die zur Abarbeitung sequentieller
+ Daten "erfunden" wurden. Die Klassiker sind map(), filter(), reduce() (oder fold()).
+ Diese Funktionen benötigen eine weitere Funktion als Argument, dieser übergeben
+ sie dann den Rückgabewert der Iterator-Funktion und verarbeiten, wenn nötig, deren Rückgabewert.
+
+Das Ganze lässt sich auch direkt in einer Memberfunktion durchführen, und so muss
+das aufrufende Programm nicht mehr mit der Abfrage des Iterations-Endes belastet werden.
+Zusätzlich bleibt das Geheimnisprinzip gewahrt, weil Objekt-interne Variablen
+nicht mehr nach außen getragen werden, wie sonst in einer Schleife.
+
+Innere Iteratoren finden sich auch in der PHP-Standardlibrary:
+Bspw. die Mathematik-Funktionen max() und min(). Sie "iterieren" über ein Array und suchen dabei den größten oder kleinsten Wert.
+
+Das Iterator-Pattern
+====================
+
+Es gibt Sprachen, die enthalten keine eingebauten Iterator-Datentypen.
+Dort können diese per Konvention simuliert werden. Ein solches Hilfsmittel nennt
+man auch Pattern[0]. Weiterhin hilft es, wenn man eigene Iterator-Objekte bauen möchte.
+
+In von Java inspirierten Sprachen (wie auch PHP seit Version 5) benutzt man dazu
+gerne Interfaces, das heißt, eine Schnittstelle, die definiert, welche Member-Funktionen
+ein Objekt haben muss, damit es wie ein Iterator angesprochen werden kann.
+
+In vernünftig designeten Sprachen mit dynamischer Typisierung genügt es, auf das
+Vorhandensein der Member-Funktion(en) zu testen, die das Gleiche leiste(t|n), wie
+die Iterator-Funktion(en) aus dem Abschnitt über den Datentyp. Ein Beispiel wäre Python.
+
+Das Iterator-Interface in PHP
+=============================
+
+Das Iterator-Interface in PHP dient lediglich dazu, dass ein Objekt wie ein PHP-Array
+in einer foreach-Schleife "abgegrast" werden kann[1]. Mehr nicht. Nach den gängigen
+Namenkonventionen für Interfaces müsste es eigentlich "Foreachable" oder "IForeach" heißen.
+Mit Iteratoren hat es insofern zu tun, dass bestimmte Funktionen innerhalb
+der Schleife mehrmals aufgerufen werden.
+
+Der Rest des unnötig umständichen APIs ist der Arbeitsweise des PHP-Datentypes
+Array geschuldet. Gewöhnliche Iteratoren müssen vor der ersten Iteration weder
+zurückgesetzt werden (->rewind()), noch müssen sie Key-Value-Assoziationen haben (->key()).
+Auch das Weiterschalten auf den nächsten Wert in eine zusätzliche Funktion
+zu verpacken (->next()) ist prinzipiell unnötig.
+
+Anwendung von Iteratoren
+========================
+
+Eine habe ich im letzten Post schon beschrieben:
+Resultsets von Datenbankabfragen (SQL-Selects). Je nachdem, ob sie gepuffert sind
+oder nicht, bieten sie über die Grundfunktionalität hinaus die Möglichkeit, auch
+rückwärts über die Datensätze zu navigieren oder bestimmte Datensätze direkt anzusteuern.
+Die Iterator-Funktion heißt hier meist ->fetch() oder ->fetchRow().
+
+Zwei Klassiker, die man praktisch in jeder Sprache oder Laufzeitumgebung findet,
+sind Dateien und Verzeichnisse. In vernünftig designeten Sprachen, sind das
+Iteratoren (oder "iterable" Objekte). In PHP haben sie andere APIs:
+
+Beim Verzeichnisobjekt heißt die Iterator-Funktion ->read().
+Das Ende der Iteration wird durch die Rückgabe des Wertes FALSE signalisiert.
+
+
+Schrittfolgen:
+==============
+
+1.	Deklaration der Schnittstelle Iterator mit den Methoden
+
+	-	current();
+	-	next();
+	-	key();
+	-	rewind();
+	-	valid();
+	
+	... soweit die Programmiersprache dieses Interface nicht anbietet
+	
+2.	Implementierung des Interfaces Iterator in einer konkreten Klasse
+
+-	in den Programmiersprachen PHP, JAVA und C# können foreach()-Strukturen automatisch
+	auf die Elemente einer Iterator-implementierenden Datenmenge sequentiell zugreifen
